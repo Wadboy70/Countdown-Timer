@@ -1,14 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import Sidebar from "./components/Sidebar.js";
-import Stage from "./components/Stage.js";
+import Stage from "./components/Stage";
 
-function App() {
+const App = () => {
   return (
-  <>
-    <Sidebar></Sidebar>
-    <Stage></Stage>
-  </>
+    <>
+      <Sidebar></Sidebar>
+      <Stage></Stage>
+    </>
   );
 }
 
