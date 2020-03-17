@@ -12,7 +12,7 @@ var getTodayDate = () => {
     return (minYear + "-" + minMonth + "-" + minDay);
 }
 const submitDate = (props, dateInfo) =>{
-    console.log(dateInfo.name);
+    console.log(dateInfo);
 }
 const DateForm = (props) => {
     const dateInfo = {
@@ -23,19 +23,25 @@ const DateForm = (props) => {
         <>
             <h2>new countdown</h2>
             <form 
-            type = {refresh(props.showForm)}
-            onSubmit = {submitDate(props, dateInfo)}>
+            type = {refresh(props.showForm)}> 
                 <input 
                 type = "text"
                 placeholder = "Name" 
                 onChange = {e => dateInfo.name = e.target.value}/>
+                
                 <input 
                 type="date" 
                 min={getTodayDate()} 
                 onChange = {e => dateInfo.date = e.target.value}/>
+
                 <button 
                 type = "submit" 
-                >Submit</button>
+                onClick = {(e) => {
+                        e.preventDefault();
+                        submitDate(props, dateInfo);
+                    }
+                }>
+                Submit</button>
             </form>
         </>
     );

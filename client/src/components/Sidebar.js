@@ -6,8 +6,8 @@ const Sidebar = (props) => {
     return (
         <>
             <button
-            onClick = {() => props.setShowInputForm(!props.showInputForm)} //toggle form showing
             type = "button"
+            onClick = {() => props.setShowInputForm(!props.showInputForm)} //toggle form showing
             >New Date</button>
         </>
     );

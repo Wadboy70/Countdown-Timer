@@ -5,15 +5,22 @@ import Stage from "./components/Stage";
 import DateForm from "./components/DateForm";
 
 const App = () => {
-const [showInputForm, setShowInputForm] = useState(false);
+  const [showInputForm, setShowInputForm] = useState(false);
+  const [counterInfo, setCounterInfo] = useState(undefined);
   return (
     <>
-      {showInputForm && <DateForm showForm = {showInputForm}></DateForm>}
       <Sidebar
       setShowInputForm = {setShowInputForm}
       showInputForm = {showInputForm}
       ></Sidebar>
-      <Stage></Stage>
+      <Stage
+      counterInfo = {counterInfo}
+      ></Stage>
+      {showInputForm && 
+      <DateForm 
+      showForm = {showInputForm}
+      setCounterInfo = {setCounterInfo}
+      ></DateForm>}
     </>
   );
 }
