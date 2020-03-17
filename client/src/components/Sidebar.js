@@ -1,9 +1,14 @@
 import React from "react";
 import "./Sidebar.css";
+import DateForm from './DateForm';
 
-const Sidebar = () => {
+const Sidebar = (props) => {
     return (
         <>
+            <button
+            type = "button"
+            onClick = {() => props.setShowInputForm(!props.showInputForm)} //toggle form showing
+            >New Date</button>
         </>
     );
 }
