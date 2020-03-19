@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import Sidebar from "./components/Sidebar.js";
 import Stage from "./components/Stage";
 import DateForm from "./components/DateForm";

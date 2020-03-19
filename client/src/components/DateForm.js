@@ -12,6 +12,7 @@ var getTodayDate = () => {
     return (minYear + "-" + minMonth + "-" + minDay);
 }
 const submitDate = (props, dateInfo) =>{
+    props.setCounterInfo(dateInfo); //passes date info to be used in countdown
     console.log(dateInfo);
 }
 const DateForm = (props) => {

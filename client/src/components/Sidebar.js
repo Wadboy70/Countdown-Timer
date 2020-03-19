@@ -1,6 +1,5 @@
 import React from "react";
 import "./Sidebar.css";
-import DateForm from './DateForm';
 
 const Sidebar = (props) => {
     return (
