@@ -2,15 +2,21 @@ import React from "react";
 import "./Timer.css";
 
 const getTime = (props) => {
-    if(props.counterInfo)
-        return props.counterInfo.name;
+    var rawDate = props.counterInfo.date;
+    var year = rawDate.slice(0,4);
+    var month = rawDate.slice(5,7);
+    var day = rawDate.slice(8);
+    return year +" "+ month + " " + day;
 
 }
 const Timer = (props) => {
     return(
-        <div>
-            <p>{getTime(props)}</p>
-        </div>
+        <>
+            {props.counterInfo && <div>
+                <h2>{props.counterInfo.name}</h2>
+                <p>{getTime(props)}</p>
+            </div>}
+        </>
     );
 }
 export default Timer;

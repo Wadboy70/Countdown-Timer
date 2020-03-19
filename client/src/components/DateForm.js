@@ -28,11 +28,13 @@ const DateForm = (props) => {
             <form 
             type = {refresh(props.showForm)}> 
                 <input 
+                required
                 type = "text"
                 placeholder = "Name" 
                 onChange = {e => dateInfo.name = e.target.value}/>
                 
                 <input 
+                required
                 type="date" 
                 min={getTodayDate()} 
                 onChange = {e => dateInfo.date = e.target.value}/>
