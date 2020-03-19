@@ -13,6 +13,8 @@ var getTodayDate = () => {
 }
 const submitDate = (props, dateInfo) =>{
     props.setCounterInfo(dateInfo); //passes date info to be used in countdown
+    props.setShowInputForm(false);
+    refresh(props.showForm);
     console.log(dateInfo);
 }
 const DateForm = (props) => {

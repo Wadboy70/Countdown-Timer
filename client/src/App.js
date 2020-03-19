@@ -17,6 +17,7 @@ const App = () => {
       ></Stage>
       {showInputForm && 
       <DateForm 
+      setShowInputForm = {setShowInputForm}
       showForm = {showInputForm}
       setCounterInfo = {setCounterInfo}
       ></DateForm>}
