@@ -8,15 +8,21 @@ const getTime = (props) => {
     targetDate.month = rawDate.slice(5,7);
     targetDate.day = rawDate.slice(8);
 
-
+}
+const getTimeLeft = (props) => {
+    
 }
 const Timer = (props) => {
     const [currTime, setCurrTime] = useState(undefined);
+    const [timeLeft, setTimeLeft] = useState(undefined);
 
     useEffect (() => {
         setInterval(() => setCurrTime(new Date().getSeconds()), 1000);
         document.title = currTime;
         return(clearInterval());
+    });
+    useEffect(() => {
+        setInterval(setTimeLeft(getTimeLeft(props)),1000)
     });
     return(
         <>
