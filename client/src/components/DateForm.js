@@ -26,9 +26,10 @@ const DateForm = (props) => {
     });
     const warningMessage = () => {
         var leap = ((dateInfo.date.year % 4 == 0) && dateInfo.date.month == 2 && dateInfo.date.day > 29) ? true : false;
-
-        //if date is larger than possible
-        if( leap || ((dateInfo.date.day > Months[dateInfo.date.month-1].length) && !leap)){
+        console.log(leap);
+        //if date is larger than possible && leap year edge case
+        if( leap || ((dateInfo.date.day > Months[dateInfo.date.month-1].length) && 
+        (dateInfo.date.year % 4 != 0 && dateInfo.date.month != 2 && dateInfo.date.day != 29))){
             setWarning("Invalid Date");
             console.log(warning);
             return;
