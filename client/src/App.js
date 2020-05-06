@@ -3,24 +3,23 @@ import Sidebar from "./components/Sidebar.js";
 import Stage from "./components/Stage";
 import DateForm from "./components/DateForm";
 
-const getTimeNow = () => {
-  var time = new Date();
-  return{
-      year: time.getFullYear(),
-      month: time.getMonth()+1,
-      day: time.getDate(),
-      hour: time.getHours(),
-      minute: time.getSeconds()
-  };
-}
+
 const App = () => {
   const [showInputForm, setShowInputForm] = useState(false);
   const [counterInfo, setCounterInfo] = useState(undefined);
   const [timeNow, setTimeNow] = useState(undefined);
 
-  useEffect(() => {
-      setInterval(setTimeNow(getTimeNow()),1000)
-  },[]);
+  const getTimeNow = () => {
+    var time = new Date();
+    return{
+        year: time.getFullYear(),
+        month: time.getMonth()+1,
+        day: time.getDate(),
+        hour: time.getHours(),
+        minute: time.getSeconds(),
+        seconds: time.getSeconds()
+    };
+  }
 
   return (
     <>
@@ -30,6 +29,7 @@ const App = () => {
       ></Sidebar>
       <Stage
       counterInfo = {counterInfo}
+      timeNow = {getTimeNow}
       ></Stage>
       {showInputForm && 
       <DateForm
