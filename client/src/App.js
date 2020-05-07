@@ -9,18 +9,6 @@ const App = () => {
   const [counterInfo, setCounterInfo] = useState(undefined);
   const [timeNow, setTimeNow] = useState(undefined);
 
-  const getTimeNow = () => {
-    var time = new Date();
-    return{
-        year: time.getFullYear(),
-        month: time.getMonth()+1,
-        day: time.getDate(),
-        hour: time.getHours(),
-        minute: time.getSeconds(),
-        seconds: time.getSeconds()
-    };
-  }
-
   return (
     <>
       <Sidebar
@@ -29,11 +17,9 @@ const App = () => {
       ></Sidebar>
       <Stage
       counterInfo = {counterInfo}
-      timeNow = {getTimeNow}
       ></Stage>
       {showInputForm && 
       <DateForm
-      timeNow = {timeNow}
       setShowInputForm = {setShowInputForm}
       showForm = {showInputForm}
       setCounterInfo = {setCounterInfo}

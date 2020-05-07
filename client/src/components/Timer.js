@@ -3,12 +3,12 @@ import "./Timer.css";
 
 const Timer = (props) => {
     const [currTime, setCurrTime] = useState(null);
-    useEffect (() => {
-        setInterval(() => setCurrTime(props.timeNow().minute), 1000);
-        document.title = "currTime";
-        console.log(currTime);
-        return(clearInterval());
-    }, props);
+    // useEffect (() => {
+    //     setInterval(() => setCurrTime(props.timeNow().minute), 1000);
+    //     document.title = "currTime";
+    //     console.log(currTime);
+    //     return(clearInterval());
+    // }, props);
     return(
         <>
             {props.counterInfo && <div>

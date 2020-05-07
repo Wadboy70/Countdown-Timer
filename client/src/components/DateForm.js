@@ -9,68 +9,58 @@ var getTodayDate = () => {
     var minYear = today.getFullYear();
     return (minYear + "-" + minMonth + "-" + minDay);
 }
+var setOption = (max, toPush) => {
+    var arr = [];
+    for(var i = 0; i < max; i++){
+        arr.push(toPush + i);
+    }
+    return arr.map((elem, i) =>  elem = <option key = {i}>{elem}</option>);
+}
 
 const DateForm = (props) => {
     const [warning, setWarning] = useState("");
+    const [refresh, setRefresh] = useState(0);
     //will be submitted with form
     const [dateInfo, setDateInfo] = useState({
         name: "",
-        date: {
-            year: 2020,
-            month: 1,
-            day: 1,
-            hour: 0,
-            minute: 0,
-            second: 0
-        }
+        year: 2020,
+        month: 1,
+        day: 1,
+        hour: 0,
+        minute: 0,
+        second: 0
     });
     const warningMessage = () => {
-        var leap = ((dateInfo.date.year % 4 == 0) && dateInfo.date.month == 2 && dateInfo.date.day > 29) ? true : false;
-        console.log(leap);
-        //if date is larger than possible && leap year edge case
-        if( leap || ((dateInfo.date.day > Months[dateInfo.date.month-1].length) && 
-        (dateInfo.date.year % 4 != 0 && dateInfo.date.month != 2 && dateInfo.date.day != 29))){
-            setWarning("Invalid Date");
-            console.log(warning);
-            return;
-        }
-        var now = props.timeNow;
-        var future = dateInfo.date;
+        var now = new Date().getTime();
+        var future = new Date(`${Months(dateInfo.year)[dateInfo.month-1].name} ${dateInfo.day} ${dateInfo.year} ${dateInfo.hour}:${dateInfo.minute}:${dateInfo.second}`).getTime();
         console.log(now);
         console.log(future);
-        if ((future.year < now.year) || 
-        ((future.year == now.year) && (future.month < now.month)  ||
-        ((future.month == now.month) && (future.day < now.day) ||
-        ((future.day == now.day) && (future.hour < now.hour) ||
-        ((future.hour == now.hour) && (future.minute < now.minute) ||
-        ((future.minute == now.minute) && (future.second < now.second))))))){
+        if (now > future){
             setWarning("Invalid Date, must be in the future");
-            console.log(warning);
+            return;
         }
+        submitDate(props, dateInfo);
+    }
+    const inputChange = (e, value) => {
+        var temp = dateInfo;
+        temp[value] = Number(e.target.value);
+        setDateInfo(temp);
+        setRefresh(refresh+1);
     }
     const submitDate = (props, dateInfo) =>{
+        console.log(dateInfo)
         props.setCounterInfo(dateInfo); //passes date info to be used in countdown
     }
     //Year Array
-    var arr = [];
-    for(var i = 0; i < 50; i++){
-        arr.push(new Date().getFullYear() + i);
-    }
-    const years = arr.map((year, i) =>  year = <option key = {i}>{year}</option>);
-
+    const years = setOption(50, new Date().getFullYear())
     //month Array
-    const months = Months.map((month,index) => {
+    const months = Months(dateInfo.year).map((month,index) => {
         return <option value = {index+1} key = {index}> {month.name} </option>;
     });
-
-    arr = [];
-    for (var i = 0; i < 31; i++){
-        arr.push(i+1);
-    }
-
-    //day Array
-    const days = arr.map((day, index) => day = <option value = {day} key = {index}>{day}</option> );
-    
+    const days = setOption(Months(dateInfo.year)[dateInfo.month-1].length,1)
+    //minute Array
+    const minutes = setOption(60,0);
+    const seconds = setOption(60,0);
     return(
         <>
             <h2>new countdown</h2>
@@ -81,34 +71,29 @@ const DateForm = (props) => {
                 placeholder = "Name" 
                 onChange = {e => dateInfo.name = e.target.value}/>
 
-                <select onChange = {e => {
-                    var temp = dateInfo;
-                    temp.date.year = Number(e.target.value);
-                    setDateInfo(temp);
-                    }}>
+                <select onChange = {(e) => inputChange(e,"year")}>
                     {years}
                 </select>
-                <select onChange = {e => {
-                    var temp = dateInfo;
-                    temp.date.month = Number(e.target.value);
-                    setDateInfo(temp);
-                    }}>
+                <select onChange = {(e) => inputChange(e,"month")}>
                     {months}
                 </select>
-                <select onChange = {e => {
-                    var temp = dateInfo;
-                    temp.date.day = Number(e.target.value);
-                    setDateInfo(temp);
-                    }}>
+                <select onChange = {(e) => inputChange(e,"day")}
+                    key = {refresh}>
                     {days}
+                </select>
+                <select onChange = {(e) => inputChange(e,"minute")}>
+                    {minutes}
+                </select>
+                <select onChange = {(e) => inputChange(e,"second")}>
+                    {seconds}
                 </select>
 
                 <button 
                 type = "submit" 
                 onClick = {(e) => {
+                        setWarning("");
                         e.preventDefault();
                         warningMessage();
-                        submitDate(props, dateInfo);
                     }
                 }>
                 Submit</button>
