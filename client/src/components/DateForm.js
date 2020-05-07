@@ -33,22 +33,19 @@ const DateForm = (props) => {
     const warningMessage = () => {
         var now = new Date().getTime();
         var future = new Date(`${Months(dateInfo.year)[dateInfo.month-1].name} ${dateInfo.day} ${dateInfo.year} ${dateInfo.hour}:${dateInfo.minute}:${dateInfo.second}`).getTime();
-        console.log(now);
-        console.log(future);
         if (now > future){
             setWarning("Invalid Date, must be in the future");
             return;
         }
-        submitDate(props, dateInfo);
+        submitDate(dateInfo);
     }
     const inputChange = (e, value) => {
         var temp = dateInfo;
         temp[value] = Number(e.target.value);
         setDateInfo(temp);
-        setRefresh(refresh+1);
+        if(value === "year" || value === "month") setRefresh(refresh+1);
     }
-    const submitDate = (props, dateInfo) =>{
-        console.log(dateInfo)
+    const submitDate = () =>{
         props.setCounterInfo(dateInfo); //passes date info to be used in countdown
     }
     //Year Array
@@ -59,6 +56,7 @@ const DateForm = (props) => {
     });
     const days = setOption(Months(dateInfo.year)[dateInfo.month-1].length,1)
     //minute Array
+    const hours = setOption(24,0);
     const minutes = setOption(60,0);
     const seconds = setOption(60,0);
     return(
@@ -80,6 +78,9 @@ const DateForm = (props) => {
                 <select onChange = {(e) => inputChange(e,"day")}
                     key = {refresh}>
                     {days}
+                </select>
+                <select onChange = {(e) => inputChange(e,"hour")}>
+                    {hours}
                 </select>
                 <select onChange = {(e) => inputChange(e,"minute")}>
                     {minutes}
