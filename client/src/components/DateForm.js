@@ -1,14 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './DateForm.css';
 import Months from './../assets/Months.js';
 
-var getTodayDate = () => {
-    var today = new Date();
-    var minDay = String(today.getDate()).padStart(2, '0');
-    var minMonth = String(today.getMonth() + 1).padStart(2, '0');
-    var minYear = today.getFullYear();
-    return (minYear + "-" + minMonth + "-" + minDay);
-}
 var setOption = (max, toPush) => {
     var arr = [];
     for(var i = 0; i < max; i++){
@@ -20,9 +13,10 @@ var setOption = (max, toPush) => {
 const DateForm = (props) => {
     const [warning, setWarning] = useState("");
     const [refresh, setRefresh] = useState(0);
+    const [nameRefresh, setNameRefresh] = useState(0);
     //will be submitted with form
     const [dateInfo, setDateInfo] = useState({
-        name: "",
+        name: null,
         year: 2020,
         month: 1,
         day: 1,
@@ -46,7 +40,13 @@ const DateForm = (props) => {
         if(value === "year" || value === "month") setRefresh(refresh+1);
     }
     const submitDate = () =>{
-        props.setCounterInfo(dateInfo); //passes date info to be used in countdown
+        if(!dateInfo.name) setWarning("Please give this countdown a name!");
+        else if (warning === ""){
+            props.setCounterInfo(dateInfo); //passes date info to be used in countdown            
+            props.setShowInputForm(false);
+            setNameRefresh(nameRefresh+1);
+            setDateInfo(null);
+        }
     }
     //Year Array
     const years = setOption(50, new Date().getFullYear())
@@ -63,13 +63,15 @@ const DateForm = (props) => {
         <>
             <h2>new countdown</h2>
             <form> 
-                <input 
-                required
+                <input
+                key = {() => nameRefresh}
+                defaultValue = ""
                 type = "text"
                 placeholder = "Name" 
                 onChange = {e => dateInfo.name = e.target.value}/>
 
-                <select onChange = {(e) => inputChange(e,"year")}>
+                <select onChange = {(e) => inputChange(e,"year")}
+                value = {dateInfo.year}>
                     {years}
                 </select>
                 <select onChange = {(e) => inputChange(e,"month")}>

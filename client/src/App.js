@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import Sidebar from "./components/Sidebar.js";
 import Stage from "./components/Stage";
 import DateForm from "./components/DateForm";
@@ -7,8 +7,6 @@ import DateForm from "./components/DateForm";
 const App = () => {
   const [showInputForm, setShowInputForm] = useState(false);
   const [counterInfo, setCounterInfo] = useState(undefined);
-  const [timeNow, setTimeNow] = useState(undefined);
-
   return (
     <>
       <Sidebar
