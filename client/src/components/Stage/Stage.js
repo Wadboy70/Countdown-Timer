@@ -1,6 +1,6 @@
 import React from "react";
 import "./Stage.css";
-import Timer from "./Timer.js";
+import Timer from "../Timer/Timer.js";
 const Stage = (props) =>{
 
     return(

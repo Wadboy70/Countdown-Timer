@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './DateForm.css';
-import Months from './../assets/Months.js';
+import Months from '../../assets/Months.js';
 
 var setOption = (max, toPush) => {
     var arr = [];
