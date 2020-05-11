@@ -5,7 +5,7 @@ const Button = (props) =>{
     return(
         <button 
         onClick = {props.do} 
-        className = "buttonStyle">
+        className = {`buttonStyle ${props.color}`}>
             {props.name}
         </button>
     );

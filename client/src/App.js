@@ -6,13 +6,21 @@ import "./App.css"
 
 const App = () => {
   const [showInputForm, setShowInputForm] = useState(false);
-  const [counterInfo, setCounterInfo] = useState(undefined);
+  const [counterInfo, setCounterInfo] = useState(null);
+  const [slide, setSlide] = useState("");
+  const closeForm = () =>{
+    setTimeout(() => {
+      setShowInputForm(false);
+    }, 1001);
+  }
   return (
     <>
       <div className = "main">
         <Sidebar
         setShowInputForm = {setShowInputForm}
         showInputForm = {showInputForm}
+        slide = {slide}
+        setSlide = {setSlide}
         ></Sidebar>
         <Stage
         counterInfo = {counterInfo}
@@ -22,7 +30,10 @@ const App = () => {
       <DateForm
       setShowInputForm = {setShowInputForm}
       showForm = {showInputForm}
+      closeForm = {closeForm}
       setCounterInfo = {setCounterInfo}
+      slide = {slide}
+      setSlide = {setSlide}
       ></DateForm>}
     </>
   );
