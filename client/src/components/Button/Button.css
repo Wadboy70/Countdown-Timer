@@ -1,0 +1,14 @@
+.buttonStyle{
+    border: none;
+    border-radius: 15px;
+    padding: 1%;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+}
+.green{
+    background-color: var(--green);
+}
+.pink{
+    background-color: var(--pink);
+}

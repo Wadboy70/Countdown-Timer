@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Months from "./../assets/Months";
+import Months from "../../assets/Months";
 import "./Timer.css";
 const getCountdownTime = (date1, date2) => {
     const countdownTime = date1.getTime() - date2.getTime();

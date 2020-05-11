@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './DateForm.css';
-import Months from './../assets/Months.js';
-
+import Months from '../../assets/Months.js';
+import Button from './../Button/Button'
 var setOption = (max, toPush) => {
     var arr = [];
     for(var i = 0; i < max; i++){
@@ -43,14 +43,15 @@ const DateForm = (props) => {
         if(!dateInfo.name) setWarning("Please give this countdown a name!");
         else if (warning === ""){
             props.setCounterInfo(dateInfo); //passes date info to be used in countdown            
-            props.setShowInputForm(false);
             setNameRefresh(nameRefresh+1);
-            setDateInfo(null);
+            props.setSlide("slideOut");
+            props.closeForm();
         }
     }
     //Year Array
     const years = setOption(50, new Date().getFullYear())
     //month Array
+    console.log(dateInfo)
     const months = Months(dateInfo.year).map((month,index) => {
         return <option value = {index+1} key = {index}> {month.name} </option>;
     });
@@ -60,7 +61,7 @@ const DateForm = (props) => {
     const minutes = setOption(60,0);
     const seconds = setOption(60,0);
     return(
-        <>
+        <div className = {`dateForm ${props.slide}`}>
             <h2>new countdown</h2>
             <form> 
                 <input
@@ -91,19 +92,19 @@ const DateForm = (props) => {
                     {seconds}
                 </select>
 
-                <button 
-                type = "submit" 
-                onClick = {(e) => {
+                <Button
+                do = {(e) => {
                         setWarning("");
                         e.preventDefault();
                         warningMessage();
                     }
-                }>
-                Submit</button>
-
+                }
+                name = "Submit"
+                color = "pink"
+                />
                 {warning && <p>{warning}</p>}
             </form>
-        </>
+        </div>
     );
 }
 

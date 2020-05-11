@@ -1,0 +1,28 @@
+.dateForm{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+.slideIn{
+    animation-name: slideIn;
+    animation-duration: 1000ms;
+}
+@keyframes slideIn{
+    0% {left: -100%;}
+    100% {left: 0}
+}
+.slideOut{
+    animation-name: slideOut;
+    animation-duration: 1000ms;
+}
+@keyframes slideOut{
+    0% {left: 0;}
+    100% {left: -100%}
+}

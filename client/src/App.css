@@ -1,0 +1,15 @@
+:root{
+    --green: #68e268;
+    --pink: #FECEFF
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+.main{
+    display: flex;
+    flex-flow: row;
+}
+.main > div{
+    height: 100%;
+}
