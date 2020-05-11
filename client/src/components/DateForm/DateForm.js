@@ -44,7 +44,6 @@ const DateForm = (props) => {
         else if (warning === ""){
             props.setCounterInfo(dateInfo); //passes date info to be used in countdown            
             setNameRefresh(nameRefresh+1);
-            setDateInfo(null);
             props.setSlide("slideOut");
             props.closeForm();
         }
@@ -52,6 +51,7 @@ const DateForm = (props) => {
     //Year Array
     const years = setOption(50, new Date().getFullYear())
     //month Array
+    console.log(dateInfo)
     const months = Months(dateInfo.year).map((month,index) => {
         return <option value = {index+1} key = {index}> {month.name} </option>;
     });
