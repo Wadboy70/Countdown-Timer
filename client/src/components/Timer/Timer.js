@@ -52,22 +52,27 @@ const Timer = (props) => {
         setCurrTime(getCountdownTime(new Date(`${Months(props.counterInfo.year)[props.counterInfo.month-1].name} ${props.counterInfo.day} ${props.counterInfo.year} ${props.counterInfo.hour}:${props.counterInfo.minute}:${props.counterInfo.second}`), new Date()));
     });
     return(
-        <>
+        <div className = "timer">
             {props.counterInfo && <div>
                 <h2>{props.counterInfo.name}</h2>
                 
             </div>}
             {
                 currTime &&
-                <div  className = "time">
-                <p>{currTime.years} years</p>
-                <p>{currTime.days} days</p>
-                <p>{currTime.hours} hours</p>
-                <p>{currTime.minutes} minutes</p>
-                <p>{currTime.seconds} seconds</p>
-                </div>
+                <>
+                    <div  className = "time">
+                        <p>{currTime.years} years</p>
+                        <p>{currTime.days} days</p>
+                        <p>{currTime.hours} hours</p>
+                        <p>{currTime.minutes} minutes</p>
+                        <p>{currTime.seconds} seconds</p>
+                    </div>
+                    <div>
+                        <p>until {`${props.counterInfo.day} ${Months(props.counterInfo.year)[props.counterInfo.month-1].name} ${props.counterInfo.year}`}</p>
+                    </div>
+                </>
             }
-        </>
+        </div>
     );
 }
 export default Timer;
