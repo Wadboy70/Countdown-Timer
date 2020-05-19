@@ -51,7 +51,6 @@ const DateForm = (props) => {
     //Year Array
     const years = setOption(50, new Date().getFullYear())
     //month Array
-    console.log(dateInfo)
     const months = Months(dateInfo.year).map((month,index) => {
         return <option value = {index+1} key = {index}> {month.name} </option>;
     });
@@ -62,48 +61,66 @@ const DateForm = (props) => {
     const seconds = setOption(60,0);
     return(
         <div className = {`dateForm ${props.slide}`}>
-            <h2>new countdown</h2>
-            <form> 
-                <input
-                key = {() => nameRefresh}
-                defaultValue = ""
-                type = "text"
-                placeholder = "Name" 
-                onChange = {e => dateInfo.name = e.target.value}/>
-
-                <select onChange = {(e) => inputChange(e,"year")}
-                value = {dateInfo.year}>
-                    {years}
-                </select>
-                <select onChange = {(e) => inputChange(e,"month")}>
-                    {months}
-                </select>
-                <select onChange = {(e) => inputChange(e,"day")}
-                    key = {refresh}>
-                    {days}
-                </select>
-                <select onChange = {(e) => inputChange(e,"hour")}>
-                    {hours}
-                </select>
-                <select onChange = {(e) => inputChange(e,"minute")}>
-                    {minutes}
-                </select>
-                <select onChange = {(e) => inputChange(e,"second")}>
-                    {seconds}
-                </select>
-
-                <Button
-                do = {(e) => {
-                        setWarning("");
-                        e.preventDefault();
-                        warningMessage();
-                    }
-                }
-                name = "Submit"
-                color = "pink"
+            <div className = "closeDiv">
+                <img className = "close" 
+                src = "/close.svg"
+                onClick = {() =>{
+                    props.setSlide("slideOut");
+                    props.closeForm();
+                }}
+                alt = "x"
                 />
-                {warning && <p>{warning}</p>}
-            </form>
+            </div>
+            <div className = "mainForm">
+                <h2>new countdown</h2>
+                <form className = "dateInput"> 
+                    <div className = "inputRow">
+                        <input
+                        key = {() => nameRefresh}
+                        defaultValue = ""
+                        type = "text"
+                        placeholder = "Name" 
+                        onChange = {e => dateInfo.name = e.target.value}/>
+                    </div>
+                    <div className = "inputRow">
+                        <select onChange = {(e) => inputChange(e,"year")}
+                        value = {dateInfo.year}>
+                            {years}
+                        </select>
+                        <select onChange = {(e) => inputChange(e,"month")}>
+                            {months}
+                        </select>
+                        <select onChange = {(e) => inputChange(e,"day")}
+                            key = {refresh}>
+                            {days}
+                        </select>
+                    </div>
+                    <div className = "inputRow">
+                        <select onChange = {(e) => inputChange(e,"hour")}>
+                            {hours}
+                        </select>
+                        <select onChange = {(e) => inputChange(e,"minute")}>
+                            {minutes}
+                        </select>
+                        <select onChange = {(e) => inputChange(e,"second")}>
+                            {seconds}
+                        </select>
+                    </div>
+                    <div className = "inputRow">
+                        <Button
+                        do = {(e) => {
+                                setWarning("");
+                                e.preventDefault();
+                                warningMessage();
+                            }
+                        }
+                        name = "Submit"
+                        color = "pink"
+                        />
+                    </div>
+                    {warning && <p>{warning}</p>}
+                </form>
+            </div>
         </div>
     );
 }

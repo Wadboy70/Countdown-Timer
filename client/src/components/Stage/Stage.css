@@ -1,3 +1,10 @@
 .stage{
     flex-grow: 4;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.mainTitle{
+    color: white;
+    margin: 1em;
 }

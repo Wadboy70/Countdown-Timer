@@ -5,7 +5,7 @@ const Stage = (props) =>{
 
     return(
         <div className = "stage">
-            <h1>Countdown!</h1>
+            <h1 className = "mainTitle">Countdown!</h1>
             {
                 props.counterInfo &&
                 <Timer {...props}></Timer>
