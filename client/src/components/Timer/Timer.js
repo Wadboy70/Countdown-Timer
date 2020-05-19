@@ -22,16 +22,17 @@ const getCountdownTime = (date1, date2) => {
         time.years++;
         yearDiv += 365;
     }
-    yearDiv /= time.years;
+    yearDiv = (yearDiv / time.years) || 0;
     time.days = days;
     time.hours = Math.floor(totalSeconds/60/60) - (time.days * 24) - Math.floor(time.years * yearDiv * 24);
     time.minutes = Math.floor(totalSeconds/60) - (time.hours * 60)- (time.days * 24 * 60)- Math.floor(time.years * yearDiv * 24 * 60);
     time.seconds = Math.floor(totalSeconds) - (time.minutes*60) - (time.hours * 60 * 60)- (time.days * 24 * 60 * 60)- Math.floor(time.years * yearDiv * 24 * 60 * 60);
     return time;
 }
-const Timer = (props) => {
+const Timer = ({
+    counterInfo
+}) => {
     const [currTime, setCurrTime] = useState(null);
-
     //Decrease the count every second
     const useInterval = (callback) => {
         const savedCallback = React.useRef();
@@ -49,12 +50,12 @@ const Timer = (props) => {
     }
        
     useInterval(()=>{
-        setCurrTime(getCountdownTime(new Date(`${Months(props.counterInfo.year)[props.counterInfo.month-1].name} ${props.counterInfo.day} ${props.counterInfo.year} ${props.counterInfo.hour}:${props.counterInfo.minute}:${props.counterInfo.second}`), new Date()));
+        setCurrTime(getCountdownTime(new Date(`${Months(counterInfo.year)[counterInfo.month-1].name} ${counterInfo.day} ${counterInfo.year} ${counterInfo.hour}:${counterInfo.minute}:${counterInfo.second}`), new Date()));
     });
     return(
         <div className = "timer">
-            {props.counterInfo && <div>
-                <h2>{props.counterInfo.name}</h2>
+            {counterInfo && <div>
+                <h2>{counterInfo.name}</h2>
                 
             </div>}
             {
@@ -68,7 +69,7 @@ const Timer = (props) => {
                         <p>{currTime.seconds} seconds</p>
                     </div>
                     <div>
-                        <p>until {`${props.counterInfo.day} ${Months(props.counterInfo.year)[props.counterInfo.month-1].name} ${props.counterInfo.year}`}</p>
+                        <p>until {`${counterInfo.day} ${Months(counterInfo.year)[counterInfo.month-1].name} ${counterInfo.year}`}</p>
                     </div>
                 </>
             }
